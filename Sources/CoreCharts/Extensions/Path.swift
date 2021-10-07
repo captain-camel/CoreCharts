@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@available(iOS 13.0, macOS 10.15, *)
 extension Path {
     /// Returns a graph from a series of points.
     static func linePathWithPoints(points: [Double], step: CGSize) -> Path {
