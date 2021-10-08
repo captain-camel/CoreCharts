@@ -1,5 +1,5 @@
 //
-//  CGPoint.swift
+//  CGPoint+MidPoints.swift
 //  
 //
 //  Created by Cameron Delong on 10/6/21.
