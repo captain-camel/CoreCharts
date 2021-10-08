@@ -8,17 +8,22 @@
 import SwiftUI
 
 /// The line showing the data on a `LineChart`.
-@available(iOS 13.0, macOS 10.15, *)
 struct LineChartLine: View {
     // MARK: Properties
     /// The data displayed.
     let data: [Double]
     
     /// The bounding rectangle of the view.
-    @Binding var frame: CGRect
+    let frame: CGSize
     
-    /// Whether the line should be curved.
-    var curved: Bool = true
+    /// The style defining the colors of the chart.
+    var style: LineChartStyle
+    
+    /// Whether the gradient under the chart is displayed.
+    var showGradient: Bool
+    
+    /// Whether the chart's line is curved.
+    var curved: Bool
     
     /// The space between 2 data points horizontally.
     var stepWidth: CGFloat {
@@ -26,7 +31,7 @@ struct LineChartLine: View {
             return 0
         }
         
-        return frame.size.width / CGFloat(data.count - 1)
+        return (frame.width) / CGFloat(data.count - 1)
     }
     
     /// The vertical length of a different of 1 in the data.
@@ -34,7 +39,7 @@ struct LineChartLine: View {
         guard let min = data.min() else { return 0 }
         guard let max = data.max() else { return 0 }
         
-        return frame.size.height / (max - min)
+        return frame.height / (max - min)
     }
     
     /// The `Path` of the line showing the data.
@@ -50,14 +55,30 @@ struct LineChartLine: View {
     // MARK: Body
     public var body: some View {
         ZStack {
-            closedPath
-                .fill(RadialGradient(colors: [Color(red: 168/255, green: 255/255, blue: 255/255), .white], center: .bottom, startRadius: 120, endRadius: 200))
-                .rotation3DEffect(.degrees(180), axis: (x: 1, y: 0, z: 0))
-                .opacity(0.4)
+            if let gradientColor = style.gradientColor {
+                closedPath
+                    .fill(
+                        RadialGradient(
+                            colors: [gradientColor, .white],
+                            center: .bottom,
+                            startRadius: 120,
+                            endRadius: 200
+                        )
+                    )
+                    .rotation3DEffect(.degrees(180), axis: (x: 1, y: 0, z: 0))
+                    .opacity(0.4)
+            }
             
             linePath
-                .stroke(LinearGradient(gradient: Gradient(colors: [Color(red: 123/255, green: 117/255, blue: 255/255), Color(red: 111/255, green: 234/255, blue: 255/255)]), startPoint: .leading, endPoint: .trailing) ,style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                .stroke(
+                    LinearGradient(
+                        gradient: Gradient(colors: [style.startColor, style.endColor]),
+                        startPoint: .leading, endPoint: .trailing
+                    ),
+                    style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round)
+                )
                 .rotation3DEffect(.degrees(180), axis: (x: 1, y: 0, z: 0))
+                .shadow(color: style.glowColor ?? .clear, radius: 5)
         }
     }
 }
