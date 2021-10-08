@@ -8,7 +8,6 @@
 import SwiftUI
 
 /// The background of a `LineChart`.
-@available(iOS 13.0, macOS 10.15, *)
 struct LineChartBackground: View {
     // MARK: Properties
     /// The data displayed.
@@ -17,11 +16,15 @@ struct LineChartBackground: View {
     /// The bounding rectangle of the view.
     @Binding var frame: CGRect
     
+    /// The number of horizontal lines the chart shows.
+    var horizontalLines: Int
+    
     /// The space between 2 data points horizontally.
     var stepWidth: CGFloat {
         if data.count < 2 {
             return 0
         }
+        
         return frame.size.width / CGFloat(data.count - 1)
     }
     
@@ -36,13 +39,13 @@ struct LineChartBackground: View {
     
     /// The labels on the y axis.
     var yAxisLabels: [Double] {
-        guard let min = data.min() else { return [0, 0, 0, 0, 0] }
-        guard let max = data.max() else { return [0, 0, 0, 0, 0] }
+        guard let min = data.min() else { return Array(repeating: 0, count: horizontalLines) }
+        guard let max = data.max() else { return Array(repeating: 0, count: horizontalLines) }
         
         var labels: [Double] = []
         
-        for row in (0..<5).reversed() {
-            labels.append(CGFloat(row) * ((max - min) / 4) + (data.min() ?? 0))
+        for row in (0..<horizontalLines).reversed() {
+            labels.append(CGFloat(row) * ((max - min) / Double(horizontalLines - 1)) + (data.min() ?? 0))
         }
         
         return labels
@@ -52,8 +55,8 @@ struct LineChartBackground: View {
     var yAxisPoints: [CGFloat] {
         var points: [CGFloat] = []
         
-        for row in 0..<5 {
-            points.append((frame.height/4) * CGFloat(row))
+        for row in 0..<horizontalLines {
+            points.append((frame.height / CGFloat(horizontalLines - 1)) * CGFloat(row))
         }
         
         return points
@@ -62,19 +65,13 @@ struct LineChartBackground: View {
     // MARK: Body
     var body: some View {
         ZStack(alignment: .topLeading) {
-            ForEach(0..<5, id: \.self) { row in
+            ForEach(0..<horizontalLines, id: \.self) { row in
                 HStack(alignment: .center) {
-                    Text(String(format: "%.2f", yAxisLabels[row]))
-                        .offset(x: 0, y: yAxisPoints[row] - frame.height / 2)
-                        .foregroundColor(Color(.systemGray4))
-                        .font(.caption)
-                    
                     Path { path in
                         path.move(to: CGPoint(x: 5, y: yAxisPoints[row]))
                         path.addLine(to: CGPoint(x: frame.width, y: yAxisPoints[row]))
                     }
                     .stroke(Color(.systemGray4), style: StrokeStyle(lineWidth: 1.5, lineCap: .round, dash: [5, 10]))
-                    .clipped()
                 }
             }
         }
