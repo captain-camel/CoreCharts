@@ -35,13 +35,33 @@ public struct LineChart: View {
     
     // MARK: Body
     public var body: some View {
-        ZStack {
-            GeometryReader { geometry in
-                LineChartBackground(data: self.data, frame: .constant(geometry.frame(in: .local)))
-                
-                LineChartLine(data: self.data, frame: .constant(CGRect(x: 0, y: 0, width: geometry.frame(in: .local).width - 40, height: geometry.frame(in: .local).height)))
-                    .offset(x: 40, y: 0)
+        HStack {
+            ZStack(alignment: .trailing) {
+                LineChartYAxisLabels(
+                    data: data,
+                    height: height,
+                    horizontalLines: horizontalLines
+                )
             }
+            
+            ZStack {
+                GeometryReader { geometry in
+                    LineChartBackground(
+                        data: self.data,
+                        frame: .constant(geometry.frame(in: .local)),
+                        horizontalLines: horizontalLines
+                    )
+                    
+                    LineChartLine(
+                        data: self.data,
+                        frame: geometry.size,
+                        style: style,
+                        showGradient: showGradient,
+                        curved: curved
+                    )
+                }
+            }
+            .readHeight($height)
         }
         .frame(height: 240)
     }
