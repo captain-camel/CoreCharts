@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Path {
-    /// Returns a graph from a series of points.
+    /// Returns a line from a series of points.
     static func linePathWithPoints(points: [Double], step: CGSize) -> Path {
         var path = Path()
         
@@ -32,7 +32,7 @@ extension Path {
         return path
     }
     
-    /// Returns a filled graph from a series of points.
+    /// Returns a filled path from a series of points.
     static func closedLinePathWithPoints(points: [Double], step: CGSize) -> Path {
         var path = Path()
         

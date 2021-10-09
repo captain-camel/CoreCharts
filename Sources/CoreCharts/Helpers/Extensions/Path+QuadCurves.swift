@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Path {
-    /// Returns a smooth graph from a series of points.
+    /// Returns a smooth line from a series of points.
     static func quadCurvedPathWithPoints(points: [Double], step: CGSize) -> Path {
         var path = Path()
         
@@ -37,7 +37,7 @@ extension Path {
         return path
     }
     
-    /// Returns a smooth filled graph from a series of points.
+    /// Returns a smooth filled path from a series of points.
     static func quadClosedCurvedPathWithPoints(points: [Double], step: CGSize) -> Path {
         var path = Path()
         
