@@ -8,24 +8,18 @@
 import SwiftUI
 
 extension View {
-    /// Updates a `Binding` when the size of a view changes.
-    @ViewBuilder func readWidth(_ size: Binding<CGFloat>) -> some View {
+    /// Updates a `Binding` with the size of a view when it changes.
+    @ViewBuilder func readSize(_ size: Binding<CGSize>) -> some View {
         self
-            .background(WidthReader(size: size))
-    }
-    
-    /// Updates a `Binding` when the size of a view changes.
-    @ViewBuilder func readHeight(_ size: Binding<CGFloat>) -> some View {
-        self
-            .background(HeightReader(size: size))
+            .background(SizeReader(size: size))
     }
 }
 
 /// A view with a binding to its own size.
-struct WidthReader: View {
+struct SizeReader: View {
     // MARK: Properties
     /// The size of the view.
-    @Binding var size: CGFloat
+    @Binding var size: CGSize
     
     // MARK: Body
     var body: some View {
@@ -33,36 +27,12 @@ struct WidthReader: View {
             Color.clear
                 .onAppear {
                     DispatchQueue.main.async {
-                        size = geometry.size.width.rounded()
+                        size = geometry.size.rounded()
                     }
                 }
                 .onChange(of: geometry.size) { _ in
                     DispatchQueue.main.async {
-                        size = geometry.size.width.rounded()
-                    }
-                }
-        }
-    }
-}
-
-/// A view with a binding to its own size.
-struct HeightReader: View {
-    // MARK: Properties
-    /// The size of the view.
-    @Binding var size: CGFloat
-    
-    // MARK: Body
-    var body: some View {
-        GeometryReader { geometry in
-            Color.clear
-                .onAppear {
-                    DispatchQueue.main.async {
-                        size = geometry.size.height.rounded()
-                    }
-                }
-                .onChange(of: geometry.size) { _ in
-                    DispatchQueue.main.async {
-                        size = geometry.size.height.rounded()
+                        size = geometry.size.rounded()
                     }
                 }
         }
