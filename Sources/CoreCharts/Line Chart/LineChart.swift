@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-/// A line graph to display data.
+/// A line chart to display data.
 public struct LineChart: View {
     // MARK: Properties
     /// The data displayed.
-    let data: [Double]
+    private let data: [Double]
     
     /// The style defining the colors of the chart.
     private var style: LineChartStyle = .blue
@@ -25,10 +25,11 @@ public struct LineChart: View {
     /// The number of horizontal lines the chart shows.
     private var horizontalLines = 5
     
-    /// The height of the view.
-    @State private var height: CGFloat = 0
+    /// The size of the view.
+    @State private var size = CGSize.zero
     
     // MARK: Initializers
+    /// Creates a line chart from an array of `Double`s.
     public init(data: [Double]) {
         self.data = data
     }
@@ -36,38 +37,25 @@ public struct LineChart: View {
     // MARK: Body
     public var body: some View {
         HStack {
-            ZStack(alignment: .trailing) {
-                LineChartYAxisLabels(
-                    data: data,
-                    height: height,
-                    horizontalLines: horizontalLines
-                )
-            }
+            ChartYAxisLabels(data: data, horizontalLines: horizontalLines)
             
             ZStack {
-                GeometryReader { geometry in
-                    LineChartBackground(
-                        data: self.data,
-                        frame: .constant(geometry.frame(in: .local)),
-                        horizontalLines: horizontalLines
-                    )
-                    
-                    LineChartLine(
-                        data: self.data,
-                        frame: geometry.size,
-                        style: style,
-                        showGradient: showGradient,
-                        curved: curved
-                    )
-                }
+                ChartBackground(horizontalLines: horizontalLines)
+                
+                LineChartLine(
+                    data: data,
+                    style: style,
+                    showGradient: showGradient,
+                    curved: curved
+                )
             }
-            .readHeight($height)
+            .readSize($size)
         }
         .frame(height: 240)
     }
     
     // MARK: Methods
-    /// Sets the style of the line graph.
+    /// Sets the style of the chart.
     public func style(_ style: LineChartStyle) -> Self {
         var newView = self
         newView.style = style
@@ -81,7 +69,7 @@ public struct LineChart: View {
         return newView
     }
     
-    /// Sets whether the line graph should be curved.
+    /// Sets whether the line should be curved.
     public func curved(_ curved: Bool = true) -> Self {
         var newView = self
         newView.curved = curved
@@ -112,10 +100,8 @@ public struct LineChart: View {
 
 struct LineChart_Previews: PreviewProvider {
     static var previews: some View {
-        LineChart(data: [-20, 21, 41, 65, 76, -5, -44, 31, 66, 4, 2, 7, 7, 54, 3, 10, 6, -67, -2, 53, 87, 63, 7, 25, 65, 11, 2, 6, 14, 64])
-            .style(.orangeGlow)
+        LineChart(data: [-20, 21, 41, 65, 76, -5, -44, 31, 66, 4, 2, 7, 7, 54, 3, 10, 6, -67, -2, 53, 87, 63, 7, 25, 65, 11, 2, 6, 14, 64, 5, 5, 5, 4, 3, 2, 41, 64])
             .curved()
             .padding()
     }
 }
-
