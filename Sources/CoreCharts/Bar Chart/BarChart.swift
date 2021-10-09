@@ -44,9 +44,9 @@ public struct BarChart: View {
                 
                 BarChartBars(data: data.map { ($0.value, UUID()) }, style: style)
             }
-            .frame(height: 240)
-        .readSize($size)
         }
+        .frame(height: 240)
+        .readSize($size)
     }
     
     // MARK: Methods
@@ -68,7 +68,7 @@ public struct BarChart: View {
 struct BarChart_Previews: PreviewProvider {
     static var previews: some View {
         BarChart(data: [20, 10, 41, -1, -76, -50, 44, 31, -66, 40, 40, 70, -70, -54, -30, -30, -60, -67, -20, 53, 87, 63, 70, -25, -65, -11, -40, -60, -14, -64])
-            .style(.teal)
+            .style(.orange)
             .padding()
     }
 }
