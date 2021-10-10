@@ -2,73 +2,81 @@
 //  BarChart.swift
 //  
 //
-//  Created by Cameron Delong on 10/7/21.
+//  Created by Cameron Delong on 10/8/21.
 //
 
 import SwiftUI
 
-/// A bar chart to display data.
 public struct BarChart: View {
     // MARK: Properties
     /// The data displayed.
-    private let data: [(label: String?, value: Double, id: UUID)]
+    let data: [(value: Double, id: UUID)]
     
     /// The style defining the colors of the chart.
     private var style: BarChartStyle = .blue
     
-    /// The number of horizontal lines the chart shows.
-    private var horizontalLines = 5
+    /// The min and max values of the data.
+    private var bounds: ClosedRange<Double>
     
     /// The size of the view.
     @State private var size = CGSize.zero
     
-    // MARK: Initializers
-    /// Creates a bar chart from an array of `Double`s.
-    public init(data: [Double]) {
-        self.data = data.map { (nil, $0, UUID()) }
+    /// The space between each bar.
+    private var barSpacing: CGFloat {
+        return 1 / CGFloat(data.count) * 90
     }
     
-    /// Creates a bar chart with labels.
-    public init(data: [(label: String?, value: Double)]) {
-        self.data = data.map { ($0.label, $0.value, UUID()) }
+    /// The width of the bars in the chart.
+    private var barWidth: CGFloat {
+        return min(size.width / CGFloat(data.count) - barSpacing, 100)
+    }
+    
+    // MARK: Initializers
+    public init(data: [Double]) {
+        self.data = data.map { ($0, UUID()) }
+        self.bounds = (data.min() ?? 0)...(data.max() ?? 0)
     }
     
     // MARK: Body
     public var body: some View {
-        HStack {
-            ChartYAxisLabels(data: data.map(\.value), horizontalLines: horizontalLines)
-            
-            ZStack(alignment: .bottom) {
-                ChartBackground(horizontalLines: horizontalLines)
-                    .frame(height: 240)
-                
-                BarChartBars(data: data.map { ($0.value, UUID()) }, style: style)
+        ZStack(alignment: .bottom) {
+            HStack(alignment: .bottom, spacing: barSpacing) {
+                ForEach(data, id: \.id) { bar in
+                    CustomRoundedRectangle(cornerRadius: 3, corners: [.topLeft, .topRight])
+                        .fill(LinearGradient(gradient: Gradient(colors: [style.startColor, style.endColor]), startPoint: .bottom, endPoint: .top))
+                        .frame(width: barWidth, height: abs(getHeight(value: bar.value)))
+                        .scaleEffect(y: bar.value < 0 ? -1 : 1, anchor: .bottom)
+                        .offset(y: getHeight(value: min(bounds.lowerBound, 0)))
+                }
             }
+            .frame(maxWidth: .infinity)
+            
+            Path { path in
+                path.move(to: CGPoint(x: 0, y: getHeight(value: max(bounds.upperBound, 0))))
+                path.addLine(to: CGPoint(x: size.width, y: getHeight(value: max(bounds.upperBound, 0))))
+            }
+            .stroke(Color(.systemGray3), style: StrokeStyle(lineWidth: 1.5, lineCap: .round))
         }
-        .frame(height: 240)
         .readSize($size)
     }
     
     // MARK: Methods
+    /// Returns the height of a bar based on its value.
+    private func getHeight(value: Double) -> CGFloat {
+        return value / (max(bounds.upperBound, 0) - min(bounds.lowerBound, 0)) * size.height
+    }
+    
+    /// Sets the bounds that the chart should scale itself in.
+    func bounds(_ bounds: ClosedRange<Double>) -> Self {
+        var newView = self
+        newView.bounds = bounds
+        return newView
+    }
+    
     /// Sets the style of the chart.
     public func style(_ style: BarChartStyle) -> Self {
         var newView = self
         newView.style = style
         return newView
-    }
-    
-    /// Sets the number of horizontal lines in the background of the chart.
-    public func horizontalLines(_ lines: Int) -> Self {
-        var newView = self
-        newView.horizontalLines = lines
-        return newView
-    }
-}
-
-struct BarChart_Previews: PreviewProvider {
-    static var previews: some View {
-        BarChart(data: [20, 10, 41, -1, -76, -50, 44, 31, -66, 40, 40, 70, -70, -54, -30, -30, -60, -67, -20, 53, 87, 63, 70, -25, -65, -11, -40, -60, -14, -64])
-            .style(.orange)
-            .padding()
     }
 }
