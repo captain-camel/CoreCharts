@@ -10,35 +10,38 @@ import SwiftUI
 /// The labels on the Y axis of a chart.
 struct ChartYAxisLabels: View {
     // MARK: Properties
-    /// The data displayed.
-    let data: [Double]
+    /// The number labels on the Y axis.
+    @Environment(\.yAxisLabels) var labels
     
-    /// The number of horizontal lines the chart shows.
-    var horizontalLines: Int
+    /// The lower and upper bound of the data.
+    let bounds: ClosedRange<Double>
+    
+    /// The color of the labels.
+    var color: Color = Color(.systemGray)
+    
+    /// The `String` specifier for displaying the `Chart`'s labels.
+    var specifier: String = "%.2f"
     
     /// The size of the view.
     @State var size = CGSize.zero
     
-    /// The labels on the y axis.
+    /// The labels on the Y axis.
     var yAxisLabels: [Double] {
-        guard let min = data.min() else { return Array(repeating: 0, count: horizontalLines) }
-        guard let max = data.max() else { return Array(repeating: 0, count: horizontalLines) }
+        var labelValues: [Double] = []
         
-        var labels: [Double] = []
-        
-        for row in (0..<horizontalLines).reversed() {
-            labels.append(CGFloat(row) * ((max - min) / Double(horizontalLines - 1)) + (data.min() ?? 0))
+        for row in (0..<labels).reversed() {
+            labelValues.append(CGFloat(row) * ((bounds.upperBound - bounds.lowerBound) / Double(labels - 1)) + bounds.lowerBound)
         }
         
-        return labels
+        return labelValues
     }
     
-    /// The positions of the labels on the y axis.
+    /// The positions of the labels on the Y axis.
     var yAxisPoints: [CGFloat] {
         var points: [CGFloat] = []
         
-        for row in 0..<horizontalLines {
-            points.append((size.height / CGFloat(horizontalLines - 1)) * CGFloat(row))
+        for row in 0..<labels {
+            points.append((size.height / CGFloat(labels - 1)) * CGFloat(row))
         }
         
         return points
@@ -47,10 +50,10 @@ struct ChartYAxisLabels: View {
     // MARK: Body
     var body: some View {
         ZStack(alignment: .trailing) {
-            ForEach(0..<horizontalLines, id: \.self) { row in
-                Text(String(format: "%.2f", yAxisLabels[row]))
+            ForEach(0..<labels, id: \.self) { row in
+                Text(String(format: specifier, yAxisLabels[row]))
                     .offset(y: yAxisPoints[row] - size.height / 2)
-                    .foregroundColor(Color(.systemGray4))
+                    .foregroundColor(color)
                     .font(.caption)
             }
         }
