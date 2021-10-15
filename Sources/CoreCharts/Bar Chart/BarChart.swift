@@ -7,45 +7,55 @@
 
 import SwiftUI
 
-public struct BarChart: View {
+/// The bars of a bar chart.
+public struct BarChart: Chart {
     // MARK: Properties
     /// The data displayed.
-    let data: [(value: Double, id: UUID)]
+    let data: [Double]
     
     /// The style defining the colors of the chart.
-    private var style: BarChartStyle = .blue
+    private var style: Style = .blue
     
     /// The min and max values of the data.
-    private var bounds: ClosedRange<Double>
+    var bounds: ClosedRange<Double>
+    
+    /// The `String` specifier for displaying the `Chart`'s labels.
+    var specifier: String = "%.2f"
+    
+    /// The position of the Y axis labels.
+    var yAxisLabelsPosition: YAxisLabelPosition = .left
+    
+    /// The color of the labels corresponding to the chart.
+    var labelColor: Color { style.startColor }
     
     /// The size of the view.
     @State private var size = CGSize.zero
     
     /// The space between each bar.
     private var barSpacing: CGFloat {
-        return 1 / CGFloat(data.count) * 90
+        1 / CGFloat(data.count) * 90
     }
     
     /// The width of the bars in the chart.
     private var barWidth: CGFloat {
-        return min(size.width / CGFloat(data.count) - barSpacing, 100)
+        min(size.width / CGFloat(data.count) - barSpacing, 100)
     }
     
     // MARK: Initializers
     public init(data: [Double]) {
-        self.data = data.map { ($0, UUID()) }
-        self.bounds = (data.min() ?? 0)...(data.max() ?? 0)
+        self.data = data
+        self.bounds = min(data.min() ?? 0, 0)...max(data.max() ?? 0, 0)
     }
     
     // MARK: Body
     public var body: some View {
         ZStack(alignment: .bottom) {
             HStack(alignment: .bottom, spacing: barSpacing) {
-                ForEach(data, id: \.id) { bar in
+                ForEach(data, id: \.self) { value in
                     CustomRoundedRectangle(cornerRadius: 3, corners: [.topLeft, .topRight])
                         .fill(LinearGradient(gradient: Gradient(colors: [style.startColor, style.endColor]), startPoint: .bottom, endPoint: .top))
-                        .frame(width: barWidth, height: abs(getHeight(value: bar.value)))
-                        .scaleEffect(y: bar.value < 0 ? -1 : 1, anchor: .bottom)
+                        .frame(width: barWidth, height: abs(getHeight(value: value)))
+                        .scaleEffect(y: value < 0 ? -1 : 1, anchor: .bottom)
                         .offset(y: getHeight(value: min(bounds.lowerBound, 0)))
                 }
             }
@@ -56,6 +66,7 @@ public struct BarChart: View {
                 path.addLine(to: CGPoint(x: size.width, y: getHeight(value: max(bounds.upperBound, 0))))
             }
             .stroke(Color(.systemGray3), style: StrokeStyle(lineWidth: 1.5, lineCap: .round))
+            .zIndex(1000)
         }
         .readSize($size)
     }
@@ -63,7 +74,7 @@ public struct BarChart: View {
     // MARK: Methods
     /// Returns the height of a bar based on its value.
     private func getHeight(value: Double) -> CGFloat {
-        return value / (max(bounds.upperBound, 0) - min(bounds.lowerBound, 0)) * size.height
+        value / (max(bounds.upperBound, 0) - min(bounds.lowerBound, 0)) * size.height
     }
     
     /// Sets the bounds that the chart should scale itself in.
@@ -74,9 +85,31 @@ public struct BarChart: View {
     }
     
     /// Sets the style of the chart.
-    public func style(_ style: BarChartStyle) -> Self {
+    public func style(_ style: Style) -> Self {
         var newView = self
         newView.style = style
+        return newView
+    }
+    
+    /// Sets the starting color of the bar gradient.
+    public func startColor(_ color: Color) -> Self {
+        var newView = self
+        newView.style.startColor = color
+        return newView
+    }
+    
+    /// Sets the ending color of the bar gradient.
+    public func endColor(_ color: Color) -> Self {
+        var newView = self
+        newView.style.endColor = color
+        return newView
+    }
+    
+    /// Sets the `String` specifier for displaying the `Chart`'s labels.
+    public func labels(position: YAxisLabelPosition, specifier: String = "%.2f") -> Self {
+        var newView = self
+        newView.yAxisLabelsPosition = position
+        newView.specifier = specifier
         return newView
     }
 }

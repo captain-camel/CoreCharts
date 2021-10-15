@@ -7,14 +7,17 @@
 
 import SwiftUI
 
-/// A line chart to display data.
-public struct LineChart: View {
+/// The line showing the data on a `LineChart`.
+public struct LineChart: Chart {
     // MARK: Properties
+    /// The system color scheme.
+    @Environment(\.colorScheme) var colorScheme
+    
     /// The data displayed.
-    private let data: [Double]
+    let data: [Double]
     
     /// The style defining the colors of the chart.
-    private var style: LineChartStyle = .blue
+    private var style: Style = .blue
     
     /// Whether the gradient under the chart is displayed.
     private var showGradient = true
@@ -22,50 +25,133 @@ public struct LineChart: View {
     /// Whether the chart's line is curved.
     private var curved = false
     
-    /// The number of horizontal lines the chart shows.
-    private var horizontalLines = 5
+    /// The min and max values of the data.
+    var bounds: ClosedRange<Double>
+    
+    /// The `String` specifier for displaying the `Chart`'s labels.
+    var specifier: String = "%.2f"
+    
+    /// The position of the Y axis labels.
+    var yAxisLabelsPosition: YAxisLabelPosition = .left
+    
+    /// The color of the labels corresponding to the chart.
+    var labelColor: Color { style.startColor }
     
     /// The size of the view.
     @State private var size = CGSize.zero
     
+    /// The space between 2 data points horizontally.
+    private var stepWidth: CGFloat {
+        if data.count < 2 {
+            return 0
+        }
+        
+        return size.width / CGFloat(data.count - 1)
+    }
+    
+    /// The vertical length of a different of 1 in the data.
+    private var stepHeight: CGFloat {
+        size.height / (bounds.upperBound - bounds.lowerBound)
+    }
+    
+    /// The `Path` of the line showing the data.
+    private var linePath: Path {
+        curved ? Path.quadCurvedPathWithPoints(points: data, step: CGSize(width: stepWidth, height: stepHeight)) : Path.linePathWithPoints(points: data, step: CGSize(width: stepWidth, height: stepHeight))
+    }
+    
+    /// The `Path` of the space beneath the line showing the data.
+    private var closedPath: Path {
+        curved ? Path.quadClosedCurvedPathWithPoints(points: data, step: CGSize(width: stepWidth, height: stepHeight)) : Path.closedLinePathWithPoints(points: data, step: CGSize(width: stepWidth, height: stepHeight))
+    }
+    
     // MARK: Initializers
-    /// Creates a line chart from an array of `Double`s.
     public init(data: [Double]) {
         self.data = data
+        self.bounds = (data.min() ?? 0)...(data.max() ?? 0)
     }
     
     // MARK: Body
     public var body: some View {
-        HStack {
-            ChartYAxisLabels(data: data, horizontalLines: horizontalLines)
-            
-            ZStack {
-                ChartBackground(horizontalLines: horizontalLines)
+        ZStack {
+            Group {
+                if showGradient {
+                    closedPath
+                        .fill(
+                            LinearGradient(
+                                colors: [colorScheme == .light ? style.gradientColor : style.unwrappedDarkModeGradientColor, Color(.systemBackground)],
+                                startPoint: UnitPoint(x: 0, y: 0),
+                                endPoint: UnitPoint(x: 0, y: (data.range * stepHeight) / size.height)
+                            )
+                        )
+                    
+                    closedPath
+                        .fill(
+                            LinearGradient(
+                                stops: [Gradient.Stop(color: Color(.systemBackground), location: 0),
+                                        Gradient.Stop(color: Color(.systemBackground).opacity(0), location: 0.05),
+                                        Gradient.Stop(color: Color(.systemBackground).opacity(0), location: 0.95),
+                                        Gradient.Stop(color: Color(.systemBackground), location: 1)],
+                                startPoint: UnitPoint(x: 0, y: 1),
+                                endPoint: UnitPoint(x: 1, y: 1)
+                            )
+                        )
+                }
                 
-                LineChartLine(
-                    data: data,
-                    style: style,
-                    showGradient: showGradient,
-                    curved: curved
-                )
+                linePath
+                    .stroke(
+                        LinearGradient(
+                            gradient: Gradient(colors: [style.startColor, style.endColor]),
+                            startPoint: .leading, endPoint: .trailing
+                        ),
+                        style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round)
+                    )
+                    .shadow(color: style.glowColor, radius: 5)
             }
-            .readSize($size)
+            .offset(y: (bounds.upperBound - (data.max() ?? 0)) * stepHeight)
         }
-        .frame(height: 240)
+        .readSize($size)
     }
     
     // MARK: Methods
+    /// Sets the bounds that the chart should scale itself in.
+    func bounds(_ bounds: ClosedRange<Double>) -> Self {
+        var newView = self
+        newView.bounds = bounds
+        return newView
+    }
+    
     /// Sets the style of the chart.
-    public func style(_ style: LineChartStyle) -> Self {
+    public func style(_ style: Style) -> Self {
         var newView = self
         newView.style = style
         return newView
     }
     
-    /// Sets the visibility of the gradient under the chart.
-    public func showGradient(_ showGradient: Bool) -> Self {
+    /// Sets the starting color of the bar gradient.
+    public func startColor(_ color: Color) -> Self {
         var newView = self
-        newView.showGradient = showGradient
+        newView.style.startColor = color
+        return newView
+    }
+    
+    /// Sets the ending color of the bar gradient.
+    public func endColor(_ color: Color) -> Self {
+        var newView = self
+        newView.style.endColor = color
+        return newView
+    }
+    
+    /// Sets the gradient color under the chart.
+    public func gradientColor(_ color: Color) -> Self {
+        var newView = self
+        newView.style.gradientColor = color
+        return newView
+    }
+    
+    /// Sets the glow color of the chart.
+    public func glowColor(_ color: Color) -> Self {
+        var newView = self
+        newView.style.glowColor = color
         return newView
     }
     
@@ -76,32 +162,11 @@ public struct LineChart: View {
         return newView
     }
     
-    /// Sets the number of horizontal lines in the background of the chart.
-    public func horizontalLines(_ lines: Int) -> Self {
+    /// Sets the `String` specifier for displaying the `Chart`'s labels.
+    public func labels(position: YAxisLabelPosition, specifier: String = "%.2f") -> Self {
         var newView = self
-        newView.horizontalLines = lines
+        newView.yAxisLabelsPosition = position
+        newView.specifier = specifier
         return newView
-    }
-    
-    /// Sets the gradient color under the chart.
-    public func gradientColor(_ color: Color?) -> Self {
-        var newView = self
-        newView.style.gradientColor = color
-        return newView
-    }
-    
-    /// Sets the glow color of the chart.
-    public func glowColor(_ color: Color?) -> Self {
-        var newView = self
-        newView.style.glowColor = color
-        return newView
-    }
-}
-
-struct LineChart_Previews: PreviewProvider {
-    static var previews: some View {
-        LineChart(data: [-20, 21, 41, 65, 76, -5, -44, 31, 66, 4, 2, 7, 7, 54, 3, 10, 6, -67, -2, 53, 87, 63, 7, 25, 65, 11, 2, 6, 14, 64, 5, 5, 5, 4, 3, 2, 41, 64])
-            .curved()
-            .padding()
     }
 }
