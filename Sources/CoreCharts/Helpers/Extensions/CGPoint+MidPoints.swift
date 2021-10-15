@@ -9,7 +9,7 @@ import CoreGraphics
 
 extension CGPoint {
     static func midPointForPoints(p1: CGPoint, p2: CGPoint) -> CGPoint {
-        return CGPoint(x: (p1.x + p2.x) / 2,y: (p1.y + p2.y) / 2)
+        CGPoint(x: (p1.x + p2.x) / 2,y: (p1.y + p2.y) / 2)
     }
 
     static func controlPointForPoints(p1: CGPoint, p2: CGPoint) -> CGPoint {
