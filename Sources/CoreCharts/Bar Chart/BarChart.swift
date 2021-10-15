@@ -7,7 +7,10 @@
 
 import SwiftUI
 
-/// The bars of a bar chart.
+/// A bar chart that displays an array of `Double`s.
+///
+/// Shows a bar for each data point.
+/// Should be used inside of a `ChartView`.
 public struct BarChart: Chart {
     // MARK: Properties
     /// The data displayed.
@@ -42,6 +45,9 @@ public struct BarChart: Chart {
     }
     
     // MARK: Initializers
+    /// Creates a bar chart from an array of `Double`s
+    /// 
+    /// - Parameter data: The data to display.
     public init(data: [Double]) {
         self.data = data
         self.bounds = min(data.min() ?? 0, 0)...max(data.max() ?? 0, 0)
