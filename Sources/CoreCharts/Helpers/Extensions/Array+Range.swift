@@ -8,6 +8,6 @@
 extension Array where Element: AdditiveArithmetic & ExpressibleByIntegerLiteral, Element: Comparable {
     /// The range of the `Array`, i.e. `max - min`.
     var range: Element {
-        return (self.max() ?? 0) - (self.min() ?? 0)
+        (self.max() ?? 0) - (self.min() ?? 0)
     }
 }
