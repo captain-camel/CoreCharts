@@ -12,26 +12,22 @@ extension Path {
     static func quadCurvedPathWithPoints(points: [Double], step: CGSize) -> Path {
         var path = Path()
         
-        if points.count < 2 {
-            return path
-        }
+        guard let max = points.max(), points.count > 1 else { return path }
         
-        let offset = points.min()!
-        
-        var p1 = CGPoint(x: 0, y: CGFloat(points[0] - offset) * step.height)
-        path.move(to: p1)
+        var point1 = CGPoint(x: 0, y: CGFloat(max - points[0]) * step.height)
+        path.move(to: point1)
         
         for pointIndex in 1..<points.count {
-            let p2 = CGPoint(
+            let point2 = CGPoint(
                 x: step.width * CGFloat(pointIndex),
-                y: step.height * CGFloat(points[pointIndex] - offset)
+                y: step.height * CGFloat(max - points[pointIndex])
             )
-            let midPoint = CGPoint.midPointForPoints(p1: p1, p2: p2)
+            let midPoint = CGPoint.midPointForPoints(p1: point1, p2: point2)
             
-            path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(p1: midPoint, p2: p1))
-            path.addQuadCurve(to: p2, control: CGPoint.controlPointForPoints(p1: midPoint, p2: p2))
+            path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point1))
+            path.addQuadCurve(to: point2, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point2))
             
-            p1 = p2
+            point1 = point2
         }
         
         return path
@@ -41,31 +37,27 @@ extension Path {
     static func quadClosedCurvedPathWithPoints(points: [Double], step: CGSize) -> Path {
         var path = Path()
         
-        if points.count < 2 {
-            return path
-        }
+        guard let min = points.min(), let max = points.max(), points.count > 1 else { return path }
         
-        let offset = points.min()!
+        path.move(to: CGPoint(x: 0, y: (max - min) * step.height))
         
-        path.move(to: .zero)
-        
-        var p1 = CGPoint(x: 0, y: CGFloat(points[0] - offset) * step.height)
-        path.addLine(to: p1)
+        var point1 = CGPoint(x: 0, y: CGFloat(max - points[0]) * step.height - 1)
+        path.addLine(to: point1)
         
         for pointIndex in 1..<points.count {
-            let p2 = CGPoint(
+            let point2 = CGPoint(
                 x: step.width * CGFloat(pointIndex),
-                y: step.height * CGFloat(points[pointIndex] - offset)
+                y: step.height * CGFloat(max - points[pointIndex])
             )
-            let midPoint = CGPoint.midPointForPoints(p1: p1, p2: p2)
+            let midPoint = CGPoint.midPointForPoints(p1: point1, p2: point2)
             
-            path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(p1: midPoint, p2: p1))
-            path.addQuadCurve(to: p2, control: CGPoint.controlPointForPoints(p1: midPoint, p2: p2))
+            path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point1))
+            path.addQuadCurve(to: point2, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point2))
             
-            p1 = p2
+            point1 = point2
         }
         
-        path.addLine(to: CGPoint(x: p1.x, y: 0))
+        path.addLine(to: CGPoint(x: point1.x, y: (max - min) * step.height - 1))
         path.closeSubpath()
         
         return path
