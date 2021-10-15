@@ -12,21 +12,17 @@ extension Path {
     static func linePathWithPoints(points: [Double], step: CGSize) -> Path {
         var path = Path()
         
-        if points.count < 2 {
-            return path
-        }
+        guard let max = points.max(), points.count > 1 else { return path }
         
-        guard let offset = points.min() else { return path }
-        
-        let p1 = CGPoint(x: 0, y: CGFloat(points[0] - offset) * step.height)
-        path.move(to: p1)
+        var point = CGPoint(x: 0, y: CGFloat(max - points[0]) * step.height)
+        path.move(to: point)
         
         for pointIndex in 1..<points.count {
-            let p2 = CGPoint(
+            point = CGPoint(
                 x: step.width * CGFloat(pointIndex),
-                y: step.height * CGFloat(points[pointIndex] - offset)
+                y: step.height * CGFloat(max - points[pointIndex])
             )
-            path.addLine(to: p2)
+            path.addLine(to: point)
         }
         
         return path
@@ -36,24 +32,20 @@ extension Path {
     static func closedLinePathWithPoints(points: [Double], step: CGSize) -> Path {
         var path = Path()
         
-        if points.count < 2 {
-            return path
-        }
+        guard let min = points.min(), let max = points.max(), points.count > 1 else { return path }
         
-        guard let offset = points.min() else { return path }
+        var point: CGPoint = .zero
+        path.move(to: CGPoint(x: 0, y: (max - min) * step.height - 1))
         
-        var p1 = CGPoint(x: 0, y: CGFloat(points[0] - offset) * step.height)
-        path.move(to: p1)
-        
-        for pointIndex in 1..<points.count {
-            p1 = CGPoint(
+        for pointIndex in 0..<points.count {
+            point = CGPoint(
                 x: step.width * CGFloat(pointIndex),
-                y: step.height * CGFloat(points[pointIndex] - offset)
+                y: step.height * CGFloat(max - points[pointIndex])
             )
-            path.addLine(to: p1)
+            path.addLine(to: point)
         }
         
-        path.addLine(to: CGPoint(x: p1.x, y: 0))
+        path.addLine(to: CGPoint(x: point.x, y: (max - min) * step.height - 1))
         path.closeSubpath()
         
         return path
