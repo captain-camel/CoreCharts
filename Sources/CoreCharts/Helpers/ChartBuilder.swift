@@ -9,20 +9,17 @@ import SwiftUI
 
 /// A `resultBuilder` to create complex charts.
 @resultBuilder struct ChartBuilder {
+    /// Builds a view with 0 charts.
+    @ViewBuilder static func buildBlock() -> some View {
+        HStack {
+            ChartYAxisLabels(bounds: 0...1)
+            
+            ChartBackground()
+        }
+    }
+    
     /// Builds a view with 1 chart.
     static func buildBlock<C0: Chart>(_ c0: C0) -> some View {
-//        @Environment(\.yAxisLabels) var yAxisLabels: Int
-//
-//        return HStack {
-//            ChartYAxisLabels(bounds: c0.bounds.lowerBound...c0.bounds.upperBound)
-//
-//            ZStack(alignment: .bottom) {
-//                ChartBackground()
-//
-//                c0
-//            }
-//        }
-//        .frame(height: 240)
         buildBlock(from: [c0]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
@@ -39,6 +36,19 @@ import SwiftUI
         }
     }
     
+    /// Builds a view with 3 charts.
+    static func buildBlock<C0: Chart, C1: Chart, C2: Chart>(_ c0: C0, _ c1: C1, _ c2: C2) -> some View {
+        buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
+            c0
+                .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c1
+                .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c2
+                .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+        }
+    }
+    
+    /// A helper method for other `buildBlock` methods.
     fileprivate static func buildBlock<Content: View>(from components: [ChartData], @ViewBuilder content: (_ leftLabelBounds: ClosedRange<Double>?, _ rightLabelBounds: ClosedRange<Double>?) -> Content) -> some View {
         
         let leftLabelBoundsArrays = components.filter { $0.yAxisLabelsPosition == .left }.map(\.bounds).map { ($0.lowerBound, $0.upperBound) }.unzip()
@@ -61,14 +71,6 @@ import SwiftUI
         
         return HStack {
             if let bounds = leftLabelBounds {
-//                if components.filter { $0.yAxisLabelsPosition == .left }.count == 1 {
-//                    ChartYAxisLabels(
-//                        bounds: bounds,
-//                        color: components.filter { $0.yAxisLabelsPosition == .left }.first!.labelColor
-//                    )
-//                } else {
-//                    ChartYAxisLabels(bounds: bounds)
-//                }
                 ChartYAxisLabels(
                     bounds: bounds,
                     color: components.filter { $0.yAxisLabelsPosition == .left }.count == 1
@@ -85,14 +87,6 @@ import SwiftUI
             }
             
             if let bounds = rightLabelBounds {
-//                if components.filter { $0.yAxisLabelsPosition == .right }.count == 1 {
-//                    ChartYAxisLabels(
-//                        bounds: bounds,
-//                        color: components.filter { $0.yAxisLabelsPosition == .right }.first!.labelColor
-//                    )
-//                } else {
-//                    ChartYAxisLabels(bounds: bounds)
-//                }
                 ChartYAxisLabels(
                     bounds: bounds,
                     color: components.filter { $0.yAxisLabelsPosition == .right }.count == 1
