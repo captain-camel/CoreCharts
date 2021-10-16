@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-/// A `resultBuilder` to create complex charts.
+/// A `resultBuilder` to create complex multi-layer charts.
 @resultBuilder struct ChartBuilder {
-    /// Builds a view with 0 charts.
-    @ViewBuilder static func buildBlock() -> some View {
+    /// Builds a view with no charts.
+    static func buildBlock() -> some View {
         HStack {
             ChartYAxisLabels(bounds: 0...1)
             
@@ -45,6 +45,146 @@ import SwiftUI
                 .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
             c2
                 .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+        }
+    }
+    
+    /// Builds a view with 4 charts.
+    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some View {
+        buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
+            c0
+                .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c1
+                .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c2
+                .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c3
+                .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+        }
+    }
+    
+    /// Builds a view with 5 charts.
+    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some View {
+        buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
+            c0
+                .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c1
+                .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c2
+                .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c3
+                .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c4
+                .bounds((c4.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+        }
+    }
+    
+    /// Builds a view with 6 charts.
+    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some View {
+        buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
+            c0
+                .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c1
+                .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c2
+                .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c3
+                .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c4
+                .bounds((c4.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c5
+                .bounds((c5.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+        }
+    }
+    
+    /// Builds a view with 7 charts.
+    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart, C6: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some View {
+        buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
+            c0
+                .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c1
+                .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c2
+                .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c3
+                .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c4
+                .bounds((c4.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c5
+                .bounds((c5.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c6
+                .bounds((c6.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+        }
+    }
+    
+    /// Builds a view with 8 charts.
+    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart, C6: Chart, C7: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some View {
+        buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
+            c0
+                .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c1
+                .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c2
+                .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c3
+                .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c4
+                .bounds((c4.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c5
+                .bounds((c5.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c6
+                .bounds((c6.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c7
+                .bounds((c7.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+        }
+    }
+    
+    /// Builds a view with 9 charts.
+    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart, C6: Chart, C7: Chart, C8: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some View {
+        buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
+            c0
+                .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c1
+                .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c2
+                .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c3
+                .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c4
+                .bounds((c4.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c5
+                .bounds((c5.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c6
+                .bounds((c6.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c7
+                .bounds((c7.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c8
+                .bounds((c8.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+        }
+    }
+    
+    /// Builds a view with 10 charts.
+    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart, C6: Chart, C7: Chart, C8: Chart, C9: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some View {
+        buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
+            c0
+                .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c1
+                .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c2
+                .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c3
+                .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c4
+                .bounds((c4.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c5
+                .bounds((c5.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c6
+                .bounds((c6.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c7
+                .bounds((c7.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c8
+                .bounds((c8.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+            c9
+                .bounds((c9.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
         }
     }
     
