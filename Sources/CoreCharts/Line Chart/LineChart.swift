@@ -7,7 +7,10 @@
 
 import SwiftUI
 
-/// The line showing the data on a `LineChart`.
+/// A line chart that displays an array of `Double`s.
+///
+/// Shows a line going through each data point.
+/// Should be used inside of a `ChartView`.
 public struct LineChart: Chart {
     // MARK: Properties
     /// The system color scheme.
