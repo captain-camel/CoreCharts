@@ -213,7 +213,7 @@ import SwiftUI
             if let bounds = leftLabelBounds {
                 ChartYAxisLabels(
                     bounds: bounds,
-                    color: components.filter { $0.yAxisLabelsPosition == .left }.count == 1
+                    color: components.filter { $0.yAxisLabelsPosition == .left }.count == 1 && components.count != 1
                     ? components.filter { $0.yAxisLabelsPosition == .left }.first!.labelColor
                     : Color(.systemGray),
                     specifier: components.first { $0.yAxisLabelsPosition == .left }?.specifier ?? "%.2f"
@@ -229,7 +229,7 @@ import SwiftUI
             if let bounds = rightLabelBounds {
                 ChartYAxisLabels(
                     bounds: bounds,
-                    color: components.filter { $0.yAxisLabelsPosition == .right }.count == 1
+                    color: components.filter { $0.yAxisLabelsPosition == .right }.count == 1 && components.count != 1
                     ? components.filter { $0.yAxisLabelsPosition == .right }.first!.labelColor
                     : Color(.systemGray),
                     specifier: components.first { $0.yAxisLabelsPosition == .right }?.specifier ?? "%.2f"

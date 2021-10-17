@@ -31,6 +31,7 @@ protocol ChartData {
 }
 
 extension ChartData {
+    // MARK: Methods
     /// Sets the bounds that the chart should place itself in.
     func bounds(_ bounds: ClosedRange<Double>) -> Self {
         var newView = self

@@ -14,7 +14,7 @@ import SwiftUI
 public struct BarChart: Chart {
     // MARK: Properties
     /// The data displayed.
-    let data: [Double]
+    private let data: [Double]
     
     /// The style defining the colors of the chart.
     private var style: Style = .blue
@@ -65,7 +65,6 @@ public struct BarChart: Chart {
                         .offset(y: getHeight(value: min(bounds.lowerBound, 0)))
                 }
             }
-            .frame(maxWidth: .infinity)
             
             Path { path in
                 path.move(to: CGPoint(x: 0, y: getHeight(value: max(bounds.upperBound, 0))))
@@ -81,13 +80,6 @@ public struct BarChart: Chart {
     /// Returns the height of a bar based on its value.
     private func getHeight(value: Double) -> CGFloat {
         value / (max(bounds.upperBound, 0) - min(bounds.lowerBound, 0)) * size.height
-    }
-    
-    /// Sets the bounds that the chart should scale itself in.
-    func bounds(_ bounds: ClosedRange<Double>) -> Self {
-        var newView = self
-        newView.bounds = bounds
-        return newView
     }
     
     /// Sets the style of the chart.
@@ -117,5 +109,11 @@ public struct BarChart: Chart {
         newView.yAxisLabelsPosition = position
         newView.specifier = specifier
         return newView
+    }
+}
+
+struct BarChart_Previews: PreviewProvider {
+    static var previews: some View {
+        BarChart(data: [1,2,3,4,5,4,3,2,1])
     }
 }

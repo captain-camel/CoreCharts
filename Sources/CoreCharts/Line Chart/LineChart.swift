@@ -17,7 +17,7 @@ public struct LineChart: Chart {
     @Environment(\.colorScheme) var colorScheme
     
     /// The data displayed.
-    let data: [Double]
+    private let data: [Double]
     
     /// The style defining the colors of the chart.
     private var style: Style = .blue
@@ -116,13 +116,6 @@ public struct LineChart: Chart {
     }
     
     // MARK: Methods
-    /// Sets the bounds that the chart should scale itself in.
-    func bounds(_ bounds: ClosedRange<Double>) -> Self {
-        var newView = self
-        newView.bounds = bounds
-        return newView
-    }
-    
     /// Sets the style of the chart.
     public func style(_ style: Style) -> Self {
         var newView = self
