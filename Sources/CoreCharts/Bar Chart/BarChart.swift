@@ -17,7 +17,7 @@ public struct BarChart: Chart {
     private let data: [Double]
     
     /// The style defining the colors of the chart.
-    private var style: Style = .blue
+    var style: Style = .blue
     
     /// The min and max values of the data.
     var bounds: ClosedRange<Double>
@@ -80,35 +80,6 @@ public struct BarChart: Chart {
     /// Returns the height of a bar based on its value.
     private func getHeight(value: Double) -> CGFloat {
         value / (max(bounds.upperBound, 0) - min(bounds.lowerBound, 0)) * size.height
-    }
-    
-    /// Sets the style of the chart.
-    public func style(_ style: Style) -> Self {
-        var newView = self
-        newView.style = style
-        return newView
-    }
-    
-    /// Sets the starting color of the bar gradient.
-    public func startColor(_ color: Color) -> Self {
-        var newView = self
-        newView.style.startColor = color
-        return newView
-    }
-    
-    /// Sets the ending color of the bar gradient.
-    public func endColor(_ color: Color) -> Self {
-        var newView = self
-        newView.style.endColor = color
-        return newView
-    }
-    
-    /// Sets the `String` specifier for displaying the `Chart`'s labels.
-    public func labels(position: YAxisLabelPosition, specifier: String = "%.2f") -> Self {
-        var newView = self
-        newView.yAxisLabelsPosition = position
-        newView.specifier = specifier
-        return newView
     }
 }
 
