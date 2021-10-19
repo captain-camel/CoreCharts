@@ -20,13 +20,10 @@ public struct LineChart: Chart {
     private let data: [Double]
     
     /// The style defining the colors of the chart.
-    private var style: Style = .blue
-    
-    /// Whether the gradient under the chart is displayed.
-    private var showGradient = true
+    var style: Style = .blue
     
     /// Whether the chart's line is curved.
-    private var curved = false
+    var curved = false
     
     /// The min and max values of the data.
     var bounds: ClosedRange<Double>
@@ -77,7 +74,7 @@ public struct LineChart: Chart {
     public var body: some View {
         ZStack {
             Group {
-                if showGradient {
+                if style.gradientColor != .clear {
                     closedPath
                         .fill(
                             LinearGradient(
@@ -113,56 +110,5 @@ public struct LineChart: Chart {
             .offset(y: (bounds.upperBound - (data.max() ?? 0)) * stepHeight)
         }
         .readSize($size)
-    }
-    
-    // MARK: Methods
-    /// Sets the style of the chart.
-    public func style(_ style: Style) -> Self {
-        var newView = self
-        newView.style = style
-        return newView
-    }
-    
-    /// Sets the starting color of the bar gradient.
-    public func startColor(_ color: Color) -> Self {
-        var newView = self
-        newView.style.startColor = color
-        return newView
-    }
-    
-    /// Sets the ending color of the bar gradient.
-    public func endColor(_ color: Color) -> Self {
-        var newView = self
-        newView.style.endColor = color
-        return newView
-    }
-    
-    /// Sets the gradient color under the chart.
-    public func gradientColor(_ color: Color) -> Self {
-        var newView = self
-        newView.style.gradientColor = color
-        return newView
-    }
-    
-    /// Sets the glow color of the chart.
-    public func glowColor(_ color: Color) -> Self {
-        var newView = self
-        newView.style.glowColor = color
-        return newView
-    }
-    
-    /// Sets whether the line should be curved.
-    public func curved(_ curved: Bool = true) -> Self {
-        var newView = self
-        newView.curved = curved
-        return newView
-    }
-    
-    /// Sets the `String` specifier for displaying the `Chart`'s labels.
-    public func labels(position: YAxisLabelPosition, specifier: String = "%.2f") -> Self {
-        var newView = self
-        newView.yAxisLabelsPosition = position
-        newView.specifier = specifier
-        return newView
     }
 }
