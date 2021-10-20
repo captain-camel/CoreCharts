@@ -17,7 +17,7 @@ struct ChartYAxisLabels: View {
     let bounds: ClosedRange<Double>
     
     /// The color of the labels.
-    var color: Color = Color(.systemGray)
+    var color = Color(.systemGray)
     
     /// The `String` specifier for displaying the `Chart`'s labels.
     var specifier: String = "%.2f"
