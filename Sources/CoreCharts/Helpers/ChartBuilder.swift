@@ -23,6 +23,7 @@ import SwiftUI
         buildBlock(from: [c0]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
         }
     }
     
@@ -31,8 +32,10 @@ import SwiftUI
         buildBlock(from: [c0, c1]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c1
                 .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
         }
     }
     
@@ -41,10 +44,13 @@ import SwiftUI
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c1
                 .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c2
                 .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
         }
     }
     
@@ -53,12 +59,16 @@ import SwiftUI
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c1
                 .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c2
                 .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c3
                 .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
         }
     }
     
@@ -67,14 +77,19 @@ import SwiftUI
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c1
                 .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c2
                 .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c3
                 .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c4
                 .bounds((c4.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
         }
     }
     
@@ -83,16 +98,22 @@ import SwiftUI
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c1
                 .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c2
                 .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c3
                 .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c4
                 .bounds((c4.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c5
                 .bounds((c5.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
         }
     }
     
@@ -101,18 +122,25 @@ import SwiftUI
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c1
                 .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c2
                 .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c3
                 .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c4
                 .bounds((c4.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c5
                 .bounds((c5.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c6
                 .bounds((c6.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
         }
     }
     
@@ -121,20 +149,28 @@ import SwiftUI
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c1
                 .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c2
                 .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c3
                 .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c4
                 .bounds((c4.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c5
                 .bounds((c5.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c6
                 .bounds((c6.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c7
                 .bounds((c7.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
         }
     }
     
@@ -143,22 +179,31 @@ import SwiftUI
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c1
                 .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c2
                 .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c3
                 .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c4
                 .bounds((c4.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c5
                 .bounds((c5.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c6
                 .bounds((c6.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c7
                 .bounds((c7.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c8
                 .bounds((c8.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
         }
     }
     
@@ -167,24 +212,34 @@ import SwiftUI
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c1
                 .bounds((c1.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c2
                 .bounds((c2.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c3
                 .bounds((c3.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c4
                 .bounds((c4.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c5
                 .bounds((c5.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c6
                 .bounds((c6.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c7
                 .bounds((c7.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c8
                 .bounds((c8.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
             c9
                 .bounds((c9.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
+                .showBackground(false)
         }
     }
     
@@ -195,7 +250,11 @@ import SwiftUI
         let leftLabelBounds: ClosedRange<Double>?
         
         if let min = leftLabelBoundsArrays.0.min(), let max = leftLabelBoundsArrays.1.max() {
-            leftLabelBounds = min...max
+            if max == min {
+                leftLabelBounds = (min - 1)...(max + 1)
+            } else {
+                leftLabelBounds = min...max
+            }
         } else {
             leftLabelBounds = nil
         }
@@ -204,7 +263,11 @@ import SwiftUI
         let rightLabelBounds: ClosedRange<Double>?
         
         if let min = rightLabelBoundsArrays.0.min(), let max = rightLabelBoundsArrays.1.max() {
-            rightLabelBounds = min...max
+            if max == min {
+                rightLabelBounds = (min - 1)...(max + 1)
+            } else {
+                rightLabelBounds = min...max
+            }
         } else {
             rightLabelBounds = nil
         }
@@ -214,7 +277,7 @@ import SwiftUI
                 ChartYAxisLabels(
                     bounds: bounds,
                     color: components.filter { $0.yAxisLabelsPosition == .left }.count == 1 && components.count != 1
-                    ? components.filter { $0.yAxisLabelsPosition == .left }.first!.labelColor
+                    ? components.filter { $0.yAxisLabelsPosition == .left }.first!.yAxisLabelColor
                     : Color(.systemGray),
                     specifier: components.first { $0.yAxisLabelsPosition == .left }?.specifier ?? "%.2f"
                 )
@@ -230,29 +293,12 @@ import SwiftUI
                 ChartYAxisLabels(
                     bounds: bounds,
                     color: components.filter { $0.yAxisLabelsPosition == .right }.count == 1 && components.count != 1
-                    ? components.filter { $0.yAxisLabelsPosition == .right }.first!.labelColor
+                    ? components.filter { $0.yAxisLabelsPosition == .right }.first!.yAxisLabelColor
                     : Color(.systemGray),
                     specifier: components.first { $0.yAxisLabelsPosition == .right }?.specifier ?? "%.2f"
                 )
             }
         }
         .frame(height: 240)
-    }
-}
-
-private struct YAxisLabels: EnvironmentKey {
-    static let defaultValue: Int = 7
-}
-
-extension EnvironmentValues {
-    var yAxisLabels: Int {
-        get { self[YAxisLabels.self] }
-        set { self[YAxisLabels.self] = newValue }
-    }
-}
-
-extension View {
-    func yAxisLabels(_ yAxisLabels: Int) -> some View {
-        environment(\.yAxisLabels, yAxisLabels)
     }
 }
