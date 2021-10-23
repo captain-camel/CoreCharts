@@ -7,35 +7,58 @@
 
 import SwiftUI
 
-/// A chart to display data.
-typealias Chart = ChartData & View
-
-/// The data in a `Chart` without its `body`.
-protocol ChartData {
+/// A chart that displays data.
+protocol Chart: ChartData, View {
     // MARK: Properties
-    /// The min and max values of the data.
-    var bounds: ClosedRange<Double> { get set }
+    /// The type representing the body of the chart.
+    associatedtype Content: View
     
-    /// The `String` specifier for displaying the `Chart`'s labels.
-    var specifier: String { get }
+    /// The content of the chart.
+    @ViewBuilder var content: Content { get }
     
-    /// The position of the Y axis labels.
-    var yAxisLabelsPosition: YAxisLabelPosition { get }
-    
-    /// The color of the labels corresponding to the chart.
-    var labelColor: Color { get }
-    
-    // MARK: Methods
-    /// Sets the bounds that the chart should place itself in.
-    func bounds(_ bounds: ClosedRange<Double>) -> Self
+    /// Whether to display the background of the chart.
+    var showBackground: Bool { get set }
 }
 
-extension ChartData {
+extension Chart {
+    // MARK: Properties
+    /// The body of the chart when used as a `View`.
+    @ViewBuilder public var body: some View {
+        if showBackground {
+            ChartView { self }
+        } else {
+            self.content
+        }
+        
+    }
+}
+
+extension Chart {
     // MARK: Methods
     /// Sets the bounds that the chart should place itself in.
     func bounds(_ bounds: ClosedRange<Double>) -> Self {
         var newView = self
         newView.bounds = bounds
+        return newView
+    }
+}
+
+extension Chart {
+    // MARK: Methods
+    /// Sets the position and specifier for the Y axis labels.
+    public func labels(position: YAxisLabelPosition, specifier: String = "%.2f") -> Self {
+        var newView = self
+        newView.yAxisLabelsPosition = position
+        newView.specifier = specifier
+        return newView
+    }
+}
+
+extension Chart {
+    /// Sets whether to display the background of the chart.
+    func showBackground(_ visible: Bool) -> Self {
+        var newView = self
+        newView.showBackground = visible
         return newView
     }
 }
