@@ -29,13 +29,13 @@ extension Path {
     }
     
     /// Returns a filled path from a series of points.
-    static func closedLinePathWithPoints(points: [Double], step: CGSize) -> Path {
+    static func closedLinePathWithPoints(points: [Double], step: CGSize, offset: CGFloat) -> Path {
         var path = Path()
         
         guard let min = points.min(), let max = points.max(), points.count > 1 else { return path }
         
         var point: CGPoint = .zero
-        path.move(to: CGPoint(x: 0, y: (max - min) * step.height - 1))
+        path.move(to: CGPoint(x: 0, y: (max - min) * step.height + offset))
         
         for pointIndex in 0..<points.count {
             point = CGPoint(
@@ -45,7 +45,7 @@ extension Path {
             path.addLine(to: point)
         }
         
-        path.addLine(to: CGPoint(x: point.x, y: (max - min) * step.height - 1))
+        path.addLine(to: CGPoint(x: point.x, y: (max - min) * step.height + offset))
         path.closeSubpath()
         
         return path
