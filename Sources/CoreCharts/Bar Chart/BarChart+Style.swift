@@ -8,7 +8,13 @@
 import SwiftUI
 
 extension BarChart {
-    /// A style that determines the colors of a bar chart.
+    /// A style that defines the colors of a bar chart.
+    ///
+    /// ``startColor`` defines the color of the gradient filling the bars of
+    /// the chart at the base of the bar, i.e. that part touching `0`.
+    ///
+    /// ``endColor`` defines the color of the gradient filling the bars of
+    /// the chart at the end of the bar, i.e. that part farthest from `0`.
     public struct Style {
         // MARK: Properties
         /// A blue/purple gradient.

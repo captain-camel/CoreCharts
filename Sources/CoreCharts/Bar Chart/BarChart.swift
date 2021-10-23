@@ -7,10 +7,42 @@
 
 import SwiftUI
 
-/// A bar chart that displays an array of `Double`s.
+/// A chart that shows bars for each data point.
 ///
-/// Shows a bar for each data point.
-/// Should be used inside of a `ChartView`.
+/// The bar chart displays one bar for each provided data point. Each bar
+/// extends up or down all the way to `0`. A horizontal line marks that point,
+/// where negative and positive bars meet.
+///
+/// The following creates a bar chart with numbers ascending from -3 to 3.
+///
+///     BarChart(data: [-3, -2, -1, 0, 1, 2, 3])
+///
+/// A `BarChart` can be used inside of a `ChartView` with other charts.
+///
+///     ChartView {
+///         BarChart(data: barChartData)
+///     }
+///
+/// The style of a `BarChart` the colors of each of its elements. You can set
+/// the style of a `BarChart` using the ``style(_:)`` view modifier. There are
+/// a variety of built in styles with colors that look great together. The
+/// default style is ``Style/blue``.
+///
+///     ChartView {
+///         BarChart(data: [1, 2, 3])
+///             .style(.green)
+///         BarChart(data: [3, 2, 1])
+///             .style(.orange)
+///     }
+///
+/// You can also create a custom style for the `BarChart` to use.
+///
+///     BarChart(data: barChartData)
+///         .style(.init(
+///             startColor: .blue,
+///             endColor: .green,
+///             labelColor: .red
+///         ))
 public struct BarChart: Chart {
     // MARK: Properties
     /// The data displayed.
@@ -56,7 +88,7 @@ public struct BarChart: Chart {
     }
     
     // MARK: Initializers
-    /// Creates a bar chart from an array of `Double`s
+    /// Creates a bar chart from an array of `Double`s.
     ///
     /// - Parameter data: The data to display.
     public init(data: [Double]) {
@@ -65,7 +97,6 @@ public struct BarChart: Chart {
     }
     
     // MARK: Body
-    /// The bar chart with no background.
     var content: some View {
         ZStack(alignment: .bottom) {
             HStack(alignment: .bottom, spacing: barSpacing) {
