@@ -29,15 +29,16 @@ struct ChartBackground: View {
     
     // MARK: Body
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            ForEach(0..<yAxisLabels, id: \.self) { row in
-                HStack(alignment: .center) {
-                    Path { path in
-                        path.move(to: CGPoint(x: 0, y: yAxisPoints[row]))
-                        path.addLine(to: CGPoint(x: size.width, y: yAxisPoints[row]))
-                    }
-                    .stroke(Color(.systemGray4), style: StrokeStyle(lineWidth: 1.5, lineCap: .round, dash: [5, 10]))
+        ForEach(0..<yAxisLabels, id: \.self) { row in
+            HStack(alignment: .center) {
+                Path { path in
+                    path.move(to: CGPoint(x: 0, y: yAxisPoints[row]))
+                    path.addLine(to: CGPoint(x: size.width, y: yAxisPoints[row]))
                 }
+                .stroke(Color(.systemGray4), style: StrokeStyle(lineWidth: 1.5, lineCap: .round, dash: [5, 10]))
+            }
+            .if(row == yAxisLabels - 1) { view in
+                view.zIndex(1)
             }
         }
         .readSize($size)
