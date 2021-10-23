@@ -50,4 +50,11 @@ extension LineChart {
         newView.curved = curved
         return newView
     }
+    
+    /// Sets whether gradient should be feathered near the edges of the chart.
+    public func featherGradient(_ feather: Bool = true) -> Self {
+        var newView = self
+        newView.featherGradient = feather
+        return newView
+    }
 }
