@@ -26,13 +26,12 @@ public struct ChartView<Content: View>: View {
 
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartView {
-            LineChart(data: [20, 21, 41, 65, 76, 60, 64, 61, 66, 64, 62, 67, 67, 54, 3, 10, 6, 67, 2, 53, 87, 63, 7, 25, 65, 11, 2, 6, 14, 64, 5, 5, 5, 4, 3, 2, 41, 64])
-                .style(.orange)
-            BarChart(data: [1,2,3,4,5,4,3,2,1,0,-1,-2,-3])
-                .style(.orange)
+        VStack {
+            ChartView(yAxisLabels: 3) {
+                BarChart(data: [1,2,3,4,5])
+                
+                LineChart(data: [5,4,3,2,1])
+            }
         }
-        .padding()
-        .preferredColorScheme(.some(.dark))
     }
 }
