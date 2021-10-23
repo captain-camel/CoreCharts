@@ -27,12 +27,12 @@ struct SizeReader: View {
             Color.clear
                 .onAppear {
                     DispatchQueue.main.async {
-                        size = geometry.size.rounded()
+                        size = geometry.size
                     }
                 }
                 .onChange(of: geometry.size) { _ in
                     DispatchQueue.main.async {
-                        size = geometry.size.rounded()
+                        size = geometry.size
                     }
                 }
         }
