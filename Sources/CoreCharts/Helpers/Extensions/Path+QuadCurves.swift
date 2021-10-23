@@ -34,14 +34,14 @@ extension Path {
     }
     
     /// Returns a smooth filled path from a series of points.
-    static func quadClosedCurvedPathWithPoints(points: [Double], step: CGSize) -> Path {
+    static func quadClosedCurvedPathWithPoints(points: [Double], step: CGSize, offset: CGFloat) -> Path {
         var path = Path()
         
         guard let min = points.min(), let max = points.max(), points.count > 1 else { return path }
         
-        path.move(to: CGPoint(x: 0, y: (max - min) * step.height))
+        path.move(to: CGPoint(x: 0, y: (max - min) * step.height + offset))
         
-        var point1 = CGPoint(x: 0, y: CGFloat(max - points[0]) * step.height - 1)
+        var point1 = CGPoint(x: 0, y: CGFloat(max - points[0]) * step.height)
         path.addLine(to: point1)
         
         for pointIndex in 1..<points.count {
@@ -57,7 +57,7 @@ extension Path {
             point1 = point2
         }
         
-        path.addLine(to: CGPoint(x: point1.x, y: (max - min) * step.height - 1))
+        path.addLine(to: CGPoint(x: point1.x, y: (max - min) * step.height + offset))
         path.closeSubpath()
         
         return path
