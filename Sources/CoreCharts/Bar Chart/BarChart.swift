@@ -21,6 +21,7 @@ import SwiftUI
 ///
 ///     ChartView {
 ///         BarChart(data: barChartData)
+///         LineChart(data: lineChartData)
 ///     }
 ///
 /// The style of a `BarChart` the colors of each of its elements. You can set
