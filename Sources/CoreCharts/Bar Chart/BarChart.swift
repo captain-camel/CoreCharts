@@ -13,7 +13,7 @@ import SwiftUI
 /// extends up or down all the way to `0`. A horizontal line marks that point,
 /// where negative and positive bars meet.
 ///
-/// The following creates a bar chart with numbers ascending from -3 to 3.
+/// The following creates a bar chart with values ascending from -3 to 3.
 ///
 ///     BarChart(data: [-3, -2, -1, 0, 1, 2, 3])
 ///
@@ -24,7 +24,7 @@ import SwiftUI
 ///         LineChart(data: lineChartData)
 ///     }
 ///
-/// The style of a `BarChart` the colors of each of its elements. You can set
+/// The style of a `BarChart` defines the colors of each of its elements. You can set
 /// the style of a `BarChart` using the ``style(_:)`` view modifier. There are
 /// a variety of built in styles with colors that look great together. The
 /// default style is ``Style/blue``.
