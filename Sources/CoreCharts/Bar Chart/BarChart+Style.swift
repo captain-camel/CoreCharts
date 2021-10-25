@@ -15,6 +15,11 @@ extension BarChart {
     ///
     /// ``endColor`` defines the color of the gradient filling the bars of
     /// the chart at the end of the bar, i.e. that part farthest from `0`.
+    ///
+    /// To set the `Style` of a `BarChart`, use the ``style(_:)`` modifier.
+    ///
+    ///     BarChart(data: [5, 4, 3, 2, 1])
+    ///         .style(.teal)
     public struct Style {
         // MARK: Properties
         /// A blue/purple gradient.
@@ -52,9 +57,9 @@ extension BarChart {
             labelColor: .blue
         )
         
-        /// The first color of the line.
+        /// The starting color of the gradient filling the bars of the chart.
         public var startColor: Color
-        /// The second color of the line.
+        /// The ending color of the gradient filling the bars of the chart.
         public var endColor: Color
         
         /// The color of the labels corresponding to the chart.
