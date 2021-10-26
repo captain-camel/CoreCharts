@@ -21,8 +21,4 @@ protocol ChartData {
     
     /// The color of the labels corresponding to the chart.
     var yAxisLabelColor: Color { get }
-    
-    // MARK: Methods
-    /// Sets the bounds that the chart should place itself in.
-    func bounds(_ bounds: ClosedRange<Double>) -> Self
 }
