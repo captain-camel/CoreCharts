@@ -7,10 +7,43 @@
 
 import SwiftUI
 
-/// A line chart that displays an array of `Double`s.
+/// A chart that shows a line through each data point.
 ///
-/// Shows a line going through each data point.
-/// Should be used inside of a `ChartView`.
+/// The line chart displays a line between subsequent points, forming a line
+/// covering the width of the chart. Optionally, the area under the chart is
+/// filled with a gradient defined in the chart's ``Style``.
+///
+/// The following creates a line chart with values ascending from -3 to 3.
+///
+///     LineChart(data: [-3, -2, -1, 0, 1, 2, 3])
+///
+/// A `LineChart` can be used inside of a `ChartView` with other charts.
+///
+///     ChartView {
+///         LineChart(data: lineChartData)
+///         BarChart(data: barChartData)
+///     }
+///
+/// The style of a `LineChart` defines the colors of each of its elements. You can set
+/// the style of a `LineChart` using the ``style(_:)`` view modifier. There are
+/// a variety of built in styles with colors that look great together. The
+/// default style is ``Style/blue``.
+///
+///     ChartView {
+///         LineChart(data: [1, 2, 3])
+///             .style(.green)
+///         LineChart(data: [3, 2, 1])
+///             .style(.orange)
+///     }
+///
+/// You can also create a custom style for the `LineChart` to use.
+///
+///     LineChart(data: lineChartData)
+///         .style(.init(
+///             startColor: .blue,
+///             endColor: .green,
+///             labelColor: .red
+///         ))
 public struct LineChart: Chart {
     // MARK: Properties
     /// The system color scheme.
