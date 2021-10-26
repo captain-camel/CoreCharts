@@ -244,7 +244,7 @@ import SwiftUI
     }
     
     /// A helper method for other `buildBlock` methods.
-    fileprivate static func buildBlock<Content: View>(from components: [ChartData], @ViewBuilder content: (_ leftLabelBounds: ClosedRange<Double>?, _ rightLabelBounds: ClosedRange<Double>?) -> Content) -> some View {
+    private static func buildBlock<Content: View>(from components: [ChartData], @ViewBuilder content: (_ leftLabelBounds: ClosedRange<Double>?, _ rightLabelBounds: ClosedRange<Double>?) -> Content) -> some View {
         
         let leftLabelBoundsArrays = components.filter { $0.yAxisLabelsPosition == .left }.map(\.bounds).map { ($0.lowerBound, $0.upperBound) }.unzip()
         let leftLabelBounds: ClosedRange<Double>?
