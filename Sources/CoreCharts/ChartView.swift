@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Accelerate
 
 /// A view that can display multiple charts.
 public struct ChartView<Content: View>: View {
@@ -26,12 +25,10 @@ public struct ChartView<Content: View>: View {
 
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
-            ChartView(yAxisLabels: 3) {
-                BarChart(data: [1,2,3,4,5])
-                
-                LineChart(data: [5,4,3,2,1])
-            }
+        ChartView {
+            BarChart(data: [1,2,3,4,5])
+            
+            LineChart(data: [5,4,3,2,1])
         }
     }
 }
