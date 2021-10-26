@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Accelerate
 
 /// A chart showing a number of points at specific positions.
 public struct ScatterPlot: Chart {
