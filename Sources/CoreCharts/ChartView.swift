@@ -16,6 +16,12 @@ public struct ChartView<Content: View>: View {
     /// The charts in the view.
     @ChartBuilder var content: Content
     
+    // MARK: Initializers
+    public init(yAxisLabels: Int = 5, @ChartBuilder content: () -> Content) {
+        self.yAxisLabels = yAxisLabels
+        self.content = content()
+    }
+    
     // MARK: Body
     public var body: some View {
         content
