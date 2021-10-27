@@ -8,9 +8,9 @@
 import SwiftUI
 
 /// A `resultBuilder` to create complex multi-layer charts.
-@resultBuilder struct ChartBuilder {
+@resultBuilder public struct ChartBuilder {
     /// Builds a view with no charts.
-    static func buildBlock() -> some View {
+    public static func buildBlock() -> some View {
         HStack {
             ChartYAxisLabels(bounds: 0...1)
             
@@ -19,7 +19,7 @@ import SwiftUI
     }
     
     /// Builds a view with 1 chart.
-    static func buildBlock<C0: Chart>(_ c0: C0) -> some View {
+    public static func buildBlock<C0: Chart>(_ c0: C0) -> some View {
         buildBlock(from: [c0]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
@@ -28,7 +28,7 @@ import SwiftUI
     }
     
     /// Builds a view with 2 charts.
-    static func buildBlock<C0: Chart, C1: Chart>(_ c0: C0, _ c1: C1) -> some View {
+    public static func buildBlock<C0: Chart, C1: Chart>(_ c0: C0, _ c1: C1) -> some View {
         buildBlock(from: [c0, c1]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
@@ -40,7 +40,7 @@ import SwiftUI
     }
     
     /// Builds a view with 3 charts.
-    static func buildBlock<C0: Chart, C1: Chart, C2: Chart>(_ c0: C0, _ c1: C1, _ c2: C2) -> some View {
+    public static func buildBlock<C0: Chart, C1: Chart, C2: Chart>(_ c0: C0, _ c1: C1, _ c2: C2) -> some View {
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
@@ -55,7 +55,7 @@ import SwiftUI
     }
     
     /// Builds a view with 4 charts.
-    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some View {
+    public static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some View {
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
@@ -73,7 +73,7 @@ import SwiftUI
     }
     
     /// Builds a view with 5 charts.
-    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some View {
+    public static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some View {
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
@@ -94,7 +94,7 @@ import SwiftUI
     }
     
     /// Builds a view with 6 charts.
-    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some View {
+    public static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some View {
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
@@ -118,7 +118,7 @@ import SwiftUI
     }
     
     /// Builds a view with 7 charts.
-    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart, C6: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some View {
+    public static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart, C6: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some View {
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
@@ -145,7 +145,7 @@ import SwiftUI
     }
     
     /// Builds a view with 8 charts.
-    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart, C6: Chart, C7: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some View {
+    public static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart, C6: Chart, C7: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some View {
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
@@ -175,7 +175,7 @@ import SwiftUI
     }
     
     /// Builds a view with 9 charts.
-    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart, C6: Chart, C7: Chart, C8: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some View {
+    public static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart, C6: Chart, C7: Chart, C8: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some View {
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
@@ -208,7 +208,7 @@ import SwiftUI
     }
     
     /// Builds a view with 10 charts.
-    static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart, C6: Chart, C7: Chart, C8: Chart, C9: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some View {
+    public static func buildBlock<C0: Chart, C1: Chart, C2: Chart, C3: Chart, C4: Chart, C5: Chart, C6: Chart, C7: Chart, C8: Chart, C9: Chart>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some View {
         buildBlock(from: [c0, c1, c2]) { leftLabelBounds, rightLabelBounds in
             c0
                 .bounds((c0.yAxisLabelsPosition == .left ? leftLabelBounds : rightLabelBounds)!)
