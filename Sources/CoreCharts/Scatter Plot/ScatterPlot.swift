@@ -177,7 +177,7 @@ public struct ScatterPlot: Chart {
 
 struct ScatterPlot_Previews: PreviewProvider {
     static var previews: some View {
-        ScatterPlot(data: (0..<30).map { _ in (x: Double.random(in: 90...100), y: Double.random(in: -100...100)) })
+        ScatterPlot(data: (0..<30).map { _ in (x: Double.random(in: -100...100), y: Double.random(in: -100...100)) })
             .showRegressionLine()
     }
 }
