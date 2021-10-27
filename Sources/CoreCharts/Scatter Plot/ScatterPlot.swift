@@ -166,11 +166,11 @@ public struct ScatterPlot: Chart {
         .readSize($size)
     }
     
-    func getRegressionLineY(at x: Double) -> Double {
+    private func getRegressionLineY(at x: Double) -> Double {
         x * regressionLine.slope + regressionLine.yIntercept
     }
     
-    func getRegressionLineX(at y: Double) -> Double {
+    private func getRegressionLineX(at y: Double) -> Double {
         (y - regressionLine.yIntercept) / regressionLine.slope
     }
 }
