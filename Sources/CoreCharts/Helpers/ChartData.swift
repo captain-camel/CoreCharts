@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// The data in a `Chart` without its `body`.
-protocol ChartData {
+public protocol ChartData {
     // MARK: Properties
     /// The min and max values of the data.
     var bounds: ClosedRange<Double> { get set }
@@ -21,4 +21,7 @@ protocol ChartData {
     
     /// The color of the labels corresponding to the chart.
     var yAxisLabelColor: Color { get }
+    
+    /// Whether to display the background of the chart.
+    var showBackground: Bool { get set }
 }
