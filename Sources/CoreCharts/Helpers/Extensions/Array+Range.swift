@@ -5,9 +5,9 @@
 //  Created by Cameron Delong on 10/12/21.
 //
 
-extension Array where Element: AdditiveArithmetic & ExpressibleByIntegerLiteral, Element: Comparable {
+extension Array where Element: AdditiveArithmetic & Comparable {
     /// The range of the `Array`, i.e. `max - min`.
     var range: Element {
-        (self.max() ?? 0) - (self.min() ?? 0)
+        (self.max() ?? .zero) - (self.min() ?? .zero)
     }
 }
