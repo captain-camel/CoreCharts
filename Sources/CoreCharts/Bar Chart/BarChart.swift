@@ -53,19 +53,19 @@ public struct BarChart: Chart {
     var style: Style = .blue
     
     /// The min and max values of the data.
-    var bounds: ClosedRange<Double>
+    public var bounds: ClosedRange<Double>
     
     /// The `String` specifier for displaying the `Chart`'s labels.
-    var specifier: String = "%.2f"
+    public var specifier: String = "%.2f"
     
     /// The position of the Y axis labels.
-    var yAxisLabelsPosition: YAxisLabelPosition = .left
+    public var yAxisLabelsPosition: YAxisLabelPosition = .left
     
     /// The color of the labels corresponding to the chart.
-    var yAxisLabelColor: Color { style.labelColor }
+    public var yAxisLabelColor: Color { style.labelColor }
     
     /// Whether to display the background of the chart.
-    var showBackground = true
+    public var showBackground = true
     
     /// The size of the view.
     @State private var size = CGSize.zero
@@ -91,14 +91,14 @@ public struct BarChart: Chart {
     // MARK: Initializers
     /// Creates a bar chart from an array of `Double`s.
     ///
-    /// - Parameter data: The data to display.
+    /// - Parameter data: The array of `Double`s to display.
     public init(data: [Double]) {
         self.data = data
         self.bounds = min(data.min() ?? 0, 0)...max(data.max() ?? 0, 0)
     }
     
     // MARK: Body
-    var content: some View {
+    public var content: some View {
         ZStack(alignment: .bottom) {
             HStack(alignment: .bottom, spacing: barSpacing) {
                 ForEach(data, id: \.self) { value in
