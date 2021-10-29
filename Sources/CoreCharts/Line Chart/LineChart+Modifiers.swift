@@ -31,9 +31,10 @@ extension LineChart {
     }
     
     /// Sets the gradient color under the chart.
-    public func gradientColor(_ color: Color) -> Self {
+    public func gradientColor(_ color: Color, darkMode darkModeColor: Color? = nil) -> Self {
         var newView = self
         newView.style.gradientColor = color
+        newView.style.darkModeGradientColor = darkModeColor
         return newView
     }
     
