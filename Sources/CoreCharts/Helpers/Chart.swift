@@ -8,16 +8,13 @@
 import SwiftUI
 
 /// A chart that displays data.
-protocol Chart: ChartData, View {
+public protocol Chart: ChartData, View {
     // MARK: Properties
     /// The type representing the body of the chart.
     associatedtype Content: View
     
     /// The content of the chart.
     @ViewBuilder var content: Content { get }
-    
-    /// Whether to display the background of the chart.
-    var showBackground: Bool { get set }
 }
 
 extension Chart {
@@ -36,7 +33,7 @@ extension Chart {
 extension Chart {
     // MARK: Methods
     /// Sets the bounds that the chart should place itself in.
-    func bounds(_ bounds: ClosedRange<Double>) -> Self {
+    internal func bounds(_ bounds: ClosedRange<Double>) -> Self {
         var newView = self
         newView.bounds = bounds
         return newView
@@ -56,7 +53,7 @@ extension Chart {
 
 extension Chart {
     /// Sets whether to display the background of the chart.
-    func showBackground(_ visible: Bool) -> Self {
+    internal func showBackground(_ visible: Bool) -> Self {
         var newView = self
         newView.showBackground = visible
         return newView
