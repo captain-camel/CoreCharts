@@ -31,13 +31,33 @@ Core charts currently includes 3 different charts with unique properties and use
 
 A bar chart displays one bar for each provided data point. Each bar extends up or down all the way to 0 on the Y axis.
 
-```
+```swift
 BarChart(data: [Double])
 ```
 
 ### Line chart
 
-```
+A line chart displays a line between subsequent points, forming a line covering the width of the chart. Optionally, the area under the chart is filled with a gradient defined in the chart's `Style`.
+
+```swift
 LineChart(data: [Double])
 ```
 
+### Scatter Plot
+
+A scatter plot shows one point for each provided data point. Optionally, the linear line of best fit can be displayed over the data.
+
+```swift
+ScatterPlot(data: [(x: Double, y: Double)])
+```
+
+# Modifiers
+
+Each chart has a number of unique modifiers that allow you to customize its appearance and function. There are also a few universal modifiers that can be applied to all charts.
+
+### Universal
+
+#### `labels(position:specifier:)`
+
+Sets the position and specifier for the labels corresponding to the chart. 
+By default, when charts are combined the labels are shared between all of the charts, and shown on the left. You can make the charts use seperate labels by settings their label positions to different sides.
