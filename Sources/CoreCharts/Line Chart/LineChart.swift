@@ -59,19 +59,19 @@ public struct LineChart: Chart {
     var curved = false
     
     /// The min and max values of the data.
-    var bounds: ClosedRange<Double>
+    public var bounds: ClosedRange<Double>
     
     /// The `String` specifier for displaying the `Chart`'s labels.
-    var specifier: String = "%.2f"
+    public var specifier: String = "%.2f"
     
     /// The position of the Y axis labels.
-    var yAxisLabelsPosition: YAxisLabelPosition = .left
+    public var yAxisLabelsPosition: YAxisLabelPosition = .left
     
     /// The color of the labels corresponding to the chart.
-    var yAxisLabelColor: Color { style.labelColor }
+    public var yAxisLabelColor: Color { style.labelColor }
     
     /// Whether to display the background of the chart.
-    var showBackground = true
+    public var showBackground = true
     
     /// Whether to feather the gradient near the edges of the chart.
     var featherGradient = true
@@ -108,14 +108,16 @@ public struct LineChart: Chart {
     }
     
     // MARK: Initializers
+    /// Creates a `LineChart` from an array of `Double`s.
+    ///
+    /// - Parameter data: The array of `Double`s to display.
     public init(data: [Double]) {
         self.data = data
         self.bounds = (data.min() ?? 0)...(data.max() ?? 0)
     }
     
     // MARK: Body
-    /// The line chart with no background.
-    var content: some View {
+    public var content: some View {
         ZStack {
             Group {
                 if style.gradientColor != .clear {
