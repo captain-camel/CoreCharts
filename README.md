@@ -6,17 +6,34 @@ CoreCharts is a package for creating beautiful and informational charts in Swift
 
 # Usage
 
-To render a chart, craete some chart inside of a `ChartView`.
+Each chart can be used as a regular SwiftUI view in your other views.
 
+```swift
+BarChart(data: [1, 2, 3, 4, 5, 4, 3, 2, 1])
 ```
+
+### Combining charts
+
+You can combine multiple charts into one using the `ChatView` view.
+
+```swift
 ChartView {
-    LineChart(data: [1, 2, 3, 4, 5, 4, 3, 2, 1])
+    LineChart(data: lineChartData)
+    BarChart(data: barChartData)
 }
 ```
 
 # Charts
 
-Core charts currently inclused 2 different charts, with many more on the way.
+Core charts currently includes 3 different charts with unique properties and uses.
+
+### Bar chart
+
+A bar chart displays one bar for each provided data point. Each bar extends up or down all the way to 0 on the Y axis.
+
+```
+BarChart(data: [Double])
+```
 
 ### Line chart
 
@@ -24,8 +41,3 @@ Core charts currently inclused 2 different charts, with many more on the way.
 LineChart(data: [Double])
 ```
 
-### Bar chart
-
-```
-BarChart(data: [Double])
-```
