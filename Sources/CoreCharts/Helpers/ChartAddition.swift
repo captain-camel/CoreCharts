@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Combines 2 `Chart`s into one with a shared background.
-public func +<C0: Chart, C1: Chart>(lhs: C0, rhs: C1) -> some View {
+public func + <C0: Chart, C1: Chart>(lhs: C0, rhs: C1) -> some View {
     ChartView {
         lhs
         
