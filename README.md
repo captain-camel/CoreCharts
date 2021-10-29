@@ -124,6 +124,6 @@ Sets the color of the linear line of best fit of the data.
 
 Sets the style of the linear line of best fit of the data.
 
-### `yAxisLabelColor`
+### `yAxisLabelColor(_:)`
 
 Sets the color of the Y axis labels corresponding to the chart.
