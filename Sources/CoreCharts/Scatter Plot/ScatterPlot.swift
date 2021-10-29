@@ -7,7 +7,31 @@
 
 import SwiftUI
 
-/// A chart showing a number of points at specific positions.
+/// A chart that shows points based on their `x` and `y` position.
+///
+/// The scatter plot shows one point for each provided data point. Optionally,
+/// the linear line of best fit can be displayed over the data.
+///
+/// The following creates a scatter plot with a few points.
+///
+///     ScatterPlot(data: [
+///         (x: 1, y: 4),
+///         (x: 6, y: 3),
+///         (x: 2, y: 7),
+///         (x: 0, y: -4)]
+///     )
+///
+/// To show the linear regression line, use ``showRegressionLine(_:)``.
+///
+///     ScatterPlot(data: scatterPlotData)
+///         .showRegressionLine()
+///
+/// A `ScatterPlot` can be used inside of a `ChartView` with other charts.
+///
+///     ChartView {
+///         ScatterPlot(data: scatterPlotData)
+///         BarChart(data: barChartData)
+///     }
 public struct ScatterPlot: Chart {
     // MARK: Properties
     /// The points displayed.
@@ -15,6 +39,9 @@ public struct ScatterPlot: Chart {
     
     /// The color of the points on the chart.
     var pointColor: Color = .secondary
+    
+    /// The radius of the points displayed on the chart.
+    var pointRadius: Double = 5
     
     /// The color of the linear regression line.
     var regressionLineColor: Color = .blue
@@ -26,19 +53,19 @@ public struct ScatterPlot: Chart {
     var showRegressionLine = false
     
     /// The min and max values of the data.
-    var bounds: ClosedRange<Double>
+    public var bounds: ClosedRange<Double>
     
     /// The `String` specifier for displaying the `Chart`'s labels.
-    var specifier: String = "%.2f"
+    public var specifier: String = "%.2f"
     
     /// The position of the Y axis labels.
-    var yAxisLabelsPosition: YAxisLabelPosition = .left
+    public var yAxisLabelsPosition: YAxisLabelPosition = .left
     
     /// The color of the labels corresponding to the chart.
-    var yAxisLabelColor: Color = .blue
+    public var yAxisLabelColor: Color = .blue
     
     /// Whether to display the background of the chart.
-    var showBackground = true
+    public var showBackground = true
     
     /// The size of the view.
     @State private var size = CGSize.zero
@@ -87,14 +114,25 @@ public struct ScatterPlot: Chart {
     }
     
     // MARK: Initializers
+    /// Creates a `LineChart` from an array of tuples containing an `x` and
+    /// `y` coordinate represented as `Double`s.
+    /// 
+    /// - Parameter data: The array of points to display.
     public init(data: [(x: Double, y: Double)]) {
         self.data = data
         self.bounds = (data.map(\.y).min() ?? 0)...(data.map(\.y).max() ?? 0)
     }
     
+    /// Creates a `LineChart` from an array of `CGPoint`s.
+    ///
+    /// - Parameter data: The `CGPoint`s to display.
+    public init(data: [CGPoint]) {
+        self.data = data.map { (x: $0.x, y: $0.y) }
+        self.bounds = (self.data.map(\.y).min() ?? 0)...(self.data.map(\.y).max() ?? 0)
+    }
+    
     // MARK: Body
-    /// The scatter plot with no background.
-    var content: some View {
+    public var content: some View {
         ZStack(alignment: .topLeading) {
             if showRegressionLine && data.count > 1 {
                 Path { path in
@@ -153,9 +191,9 @@ public struct ScatterPlot: Chart {
             Path { path in
                 for point in data {
                     path.addEllipse(in: CGRect(
-                        x: point.x * stepWidth - 5,
-                        y: (((data.map(\.y).max() ?? 0) - point.y) * stepHeight) - CGFloat(5),
-                        width: 10, height: 10
+                        x: point.x * stepWidth - pointRadius,
+                        y: (((data.map(\.y).max() ?? 0) - point.y) * stepHeight) - CGFloat(pointRadius),
+                        width: pointRadius / 2, height: pointRadius / 2
                     ))
                 }
             }
