@@ -60,4 +60,16 @@ Each chart has a number of unique modifiers that allow you to customize its appe
 #### `labels(position:specifier:)`
 
 Sets the position and specifier for the labels corresponding to the chart. 
-By default, when charts are combined the labels are shared between all of the charts, and shown on the left. You can make the charts use seperate labels by settings their label positions to different sides.
+By default, when charts are combined the labels are shared between all of the charts, and shown on the left. You can make the charts use separate labels by settings their label positions to different sides.
+
+### Bar chart
+
+#### `style(_:)`
+
+Sets the `Style` of the chart. The `Style` of a `BarChart` determines the colors of the bars and its corresponding label colors.
+
+#### `startColor(_:)`
+
+Sets the starting color of the gradient filling the bars of the bar chart.
+
+#### `endColor(_:)`
