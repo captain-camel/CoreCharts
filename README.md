@@ -57,73 +57,73 @@ Each chart has a number of unique modifiers that allow you to customize its appe
 
 ## Universal
 
-### `labels(position:specifier:)`
+* ### `labels(position:specifier:)`
 
 Sets the position and specifier for the labels corresponding to the chart. 
 By default, when charts are combined the labels are shared between all of the charts, and shown on the left. You can make the charts use separate labels by settings their label positions to different sides.
 
 ## Bar chart
 
-### `style(_:)`
+* ### `style(_:)`
 
 Sets the `Style` of the chart. The `Style` of a `BarChart` determines the colors of the bars and its corresponding label colors.
 
-### `startColor(_:)`
+* ### `startColor(_:)`
 
 Sets the starting color of the gradient filling the bars of the bar chart.
 
-### `endColor(_:)`
+* ### `endColor(_:)`
 
 Sets the ending color of the gradient filling the bars of the bar chart.
 
 ## Line Chart
 
-### `style(_:)`
+* ### `style(_:)`
 
 Sets the `Style` of the chart. The `Style` of a `LineChart` determines the colors of the line and various other colors of the chart.
 
-### `startColor(_:)`
+* ### `startColor(_:)`
 
 Sets the starting color of the gradient of the line.
 
-### `endColor(_:)`
+* ### `endColor(_:)`
 
 Sets the ending color of the gradient of the line.
 
-### `gradientColor(_:darkMode:)`
+* ### `gradientColor(_:darkMode:)`
 
 Sets the color of the gradient under the line. Optionally sets a separate color to use in dark mode.
 
-### `glowColor(_:)`
+* ### `glowColor(_:)`
 
 Sets the color that the line glows.
 
-### `curved(_:)`
+* ### `curved(_:)`
 
 Sets whether the line should be curved.
 
-### `featherGradient(_:)`
+* ### `featherGradient(_:)`
 
 Sets whether gradient should be feathered near the edges of the chart.
 
 ## Scatter plot
 
-### `pointColor(_:)`
+* ### `pointColor(_:)`
 
 Sets the color of the points on the chart.
 
-### `showRegressionLine(_:)`
+* ### `showRegressionLine(_:)`
 
 Sets whether to show the linear line of best fit of the data.
 
-### `regressionLineColor(_:)`
+* ### `regressionLineColor(_:)`
 
 Sets the color of the linear line of best fit of the data.
 
-### `regressionLineStyle(_:)`
+* ### `regressionLineStyle(_:)`
 
 Sets the style of the linear line of best fit of the data.
 
-### `yAxisLabelColor(_:)`
+* ### `yAxisLabelColor(_:)`
 
 Sets the color of the Y axis labels corresponding to the chart.
