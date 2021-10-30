@@ -15,35 +15,43 @@ import SwiftUI
 ///
 /// The following creates a line chart with values ascending from -3 to 3.
 ///
-///     LineChart(data: [-3, -2, -1, 0, 1, 2, 3])
+/// ```swift
+/// LineChart(data: [-3, -2, -1, 0, 1, 2, 3])
+/// ```
 ///
 /// A `LineChart` can be used inside of a `ChartView` with other charts.
 ///
-///     ChartView {
-///         LineChart(data: lineChartData)
-///         BarChart(data: barChartData)
-///     }
+/// ```swift
+/// ChartView {
+///     LineChart(data: lineChartData)
+///     BarChart(data: barChartData)
+/// }
+/// ```
 ///
 /// The style of a `LineChart` defines the colors of each of its elements. You can set
 /// the style of a `LineChart` using the ``style(_:)`` view modifier. There are
 /// a variety of built in styles with colors that look great together. The
 /// default style is ``Style/blue``.
 ///
-///     ChartView {
-///         LineChart(data: [1, 2, 3])
-///             .style(.green)
-///         LineChart(data: [3, 2, 1])
-///             .style(.orange)
-///     }
+/// ```swift
+/// ChartView {
+///     LineChart(data: [1, 2, 3])
+///         .style(.green)
+///     LineChart(data: [3, 2, 1])
+///         .style(.orange)
+/// }
+/// ```
 ///
 /// You can also create a custom style for the `LineChart` to use.
 ///
-///     LineChart(data: lineChartData)
-///         .style(.init(
-///             startColor: .blue,
-///             endColor: .green,
-///             labelColor: .red
-///         ))
+/// ```swift
+/// LineChart(data: lineChartData)
+///     .style(.init(
+///         startColor: .blue,
+///         endColor: .green,
+///         labelColor: .red
+///     ))
+/// ```
 public struct LineChart: Chart {
     // MARK: Properties
     /// The system color scheme.

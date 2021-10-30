@@ -14,24 +14,30 @@ import SwiftUI
 ///
 /// The following creates a scatter plot with a few points.
 ///
-///     ScatterPlot(data: [
-///         (x: 1, y: 4),
-///         (x: 6, y: 3),
-///         (x: 2, y: 7),
-///         (x: 0, y: -4)]
-///     )
+/// ```swift
+/// ScatterPlot(data: [
+///     (x: 1, y: 4),
+///     (x: 6, y: 3),
+///     (x: 2, y: 7),
+///     (x: 0, y: -4)]
+/// )
+/// ```
 ///
 /// To show the linear regression line, use ``showRegressionLine(_:)``.
 ///
-///     ScatterPlot(data: scatterPlotData)
-///         .showRegressionLine()
+/// ```swift
+/// ScatterPlot(data: scatterPlotData)
+///     .showRegressionLine()
+/// ```
 ///
 /// A `ScatterPlot` can be used inside of a `ChartView` with other charts.
 ///
-///     ChartView {
-///         ScatterPlot(data: scatterPlotData)
-///         BarChart(data: barChartData)
-///     }
+/// ```swift
+/// ChartView {
+///     ScatterPlot(data: scatterPlotData)
+///     BarChart(data: barChartData)
+/// }
+/// ```
 public struct ScatterPlot: Chart {
     // MARK: Properties
     /// The points displayed.
