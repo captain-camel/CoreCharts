@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// A view that can display multiple charts.
+/// A view that combined multiples `Chart`s into one.
 public struct ChartView<Content: View>: View {
     // MARK: Properties
     /// The number of horizontal lines the chart shows.
@@ -32,9 +32,8 @@ public struct ChartView<Content: View>: View {
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
         ChartView {
-            BarChart(data: [1,2,3,4,5])
-            
-            LineChart(data: [5,4,3,2,1])
+            LineChart(data: [5, 4, 3, 2, 1])
+            BarChart(data: [1, 2, 3, 4, 5])
         }
     }
 }
