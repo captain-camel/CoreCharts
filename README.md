@@ -2,8 +2,6 @@
 
 CoreCharts is a package for creating beautiful and informational charts in SwiftUI.
 
-![Screenshot](Assets/Screenshot.png)
-
 # Usage
 
 Each chart can be used as a regular SwiftUI view in your other views.
